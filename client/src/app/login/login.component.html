@@ -1,0 +1,223 @@
+<div class="tab-pane active" *ngIf="loginPanel">
+    <div class="row">
+        <div class="col-xl-12">
+            <section class="login-form">
+                <div class="container logintu">
+                    <div class="tool">
+                        <div class="row">
+                            <div class="col-xs-12 form-center-focused">
+                                <div></div>
+                                <div class="tab">
+                                    <!-- Nav tabs -->
+                                    <div class="tab-wrap">
+                                        <div class="container">
+                                            <div class="">
+                                                <ul class="nav nav-dashboard justify-content-center justify-content-md-start" role="tablist">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link ng-scope active show" data-toggle="tab" href="#emaildiv" aria-selected="false">Login
+                                                            with Email</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link ng-scope no" data-toggle="tab" href="#phonediv" aria-selected="false">Login
+                                                            with Phone</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="tab-content">
+                                    <div id="emaildiv" class="tab-pane fade in active show">
+                                        <form #loginForm="ngForm" novalidate class="new-project">
+                                            <div class="form-group">
+                                                <label for="email">Email</label>
+                                                <input name="email" [(ngModel)]="loginCredentials.email" #email="ngModel" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                                    class="form-control label_better" data-position="top" placeholder="Email"
+                                                    maxlength="255" type="email" autocomplete="off">
+                                                <div [ngClass]="{
+                                    'errormsg': email.invalid && (email.dirty || email.touched),
+                                    'has-success': email.valid && (email.dirty || email.touched)}" *ngIf="email.errors && (email.dirty || email.touched)">
+                                                    <p class="sm-font" *ngIf="email.errors.required">Email is required</p>
+                                                    <p class="sm-font" *ngIf="email.errors.pattern">Please enter a valid
+                                                        email
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="password">Password </label>
+                                                <input name="password" [(ngModel)]="loginCredentials.password" #password="ngModel" required class="form-control" placeholder="Password"
+                                                    type="password">
+                                                <div [ngClass]="{
+                                    'errormsg': password.invalid && (password.dirty || password.touched),
+                                    'has-success': password.valid && (password.dirty || password.touched)}" *ngIf="password.errors && (password.dirty || password.touched)">
+                                                    <p class="sm-font" *ngIf="password.errors.required">Password is required</p>
+                                                </div>
+                                            </div>
+                                                <re-captcha [(ngModel)]="declarativeFormCaptchaValue" name="captcha" class="form-control" required></re-captcha>
+                                            
+                                            <br/>
+                                            <div class=" form-group d-flex justify-content-between ">
+                                                <input type="hidden" class="form-control" name="_csrf" [(ngModel)]="loginCredentials._csrf" #_csrf="ngModel">
+                                                <button class="btn btn-primary lgnbtn" [disabled]="loginForm.invalid" (click)="loginfn()" type="submit">Log
+                                                    In
+                                                </button>
+                                                <a href="signup" class="btn btn-outline-primary lgnbtn1">Sign Up
+                                                </a>
+                                            </div>
+                                            <br>
+                                            <a class="" href="/forgotpassword">Forgot password?
+                                            </a>
+                                        </form>
+                                    </div>
+                                    <div id="phonediv" class="tab-pane fade">
+                                        <form #loginByPhoneForm="ngForm" class="new-project" novalidate>
+                                            <div class="form-group">
+                                                <label for="phone">Phone</label>
+                                                <br>
+                                                <input type="text" class="form-control" name="phone" id="phone" [(ngModel)]="loginByPhone.phone" #phone="ngModel" placeholder="Phone"
+                                                    ng2TelInput [ng2TelInputOptions]="{initialCountry: IPcountryCode}" (ng2TelOutput)="getNumber($event)"
+                                                />
+                                                <div [ngClass]="{
+                                        'errormsg': phone.invalid && (phone.dirty || phone.touched),
+                                        'has-success': phone.valid && (phone.dirty || phone.touched)}" *ngIf="phone.errors && (phone.dirty || phone.touched)">
+                                                    <p class="sm-font" *ngIf="phone.errors.required">Phone is required</p>
+                                                </div>
+                                            </div>
+                                                <re-captcha [(ngModel)]="declarativeFormCaptchaValue" name="captcha" class="form-control" required></re-captcha>
+                                            <br/>
+                                            <div class="d-flex justify-content-between">
+                                                <input type="hidden" class="form-control" name="_csrf" [(ngModel)]="loginByPhone._csrf" #_csrf="ngModel">
+                                                <button class="btn btn-primary" [disabled]="loginByPhoneForm.invalid" (click)="loginPhonefn()" type="submit">Next</button>
+                                                <span routerLink="/signup" class="btn btn-outline-primary">Sign Up
+                                                </span>
+                                            </div>
+                                            <br>
+                                            <a class="" href="/forgotpassword">Forgot password?
+                                            </a>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <!--<form action="" method="POST" class="new-project">
+                                  <div class="alert alert-<%= messages.type %>" role="alert"><%= (messages.message) ? messages.message : "" %></div>
+                                  <div class="form-group" id="emaildiv">
+                                      <label for="email">Email/Phone</label>
+                                      <input type="text" id="email" name="username" ng-model="loginusername" title="{{'Please enter your account email.' |}}" tabindex="1" class="form-control" required placeholder="{{'Email' |}}/{{'Phone' |}}" />
+                                      <span style="color: red;">{{otpstatuserror}}</span>
+                                      <span style="color: green;">{{otpstatus}}</span>
+                                  </div>
+                                  <div class="form-group " id="passworddiv">
+                                      <label for="password">Password/OTP  </label><a class="pull-right" href="javascript:void(0)" ng-click="sendOTP()">Send OTP code</a>
+                                      <input type="password" id="password" name="password" title="{{'Please enter password' |}}" tabindex="2" class="form-control" required placeholder="{{'Password' |}}/{{'OTP' |}}" />
+                                  </div>
+
+                                  <div class="form-group">
+                                      <%- captcha %>
+                                  </div>
+                                  <br/>
+                                  <div class="d-flex justify-content-between">
+                                      <button class="btn btn-primary" type="submit">Log In</button>
+                                      <a href="/users/signup" class="btn btn-outline-primary">Sign Up</a>
+                                  </div>
+                                  <br>
+                                  <a class="" tabindex="17" href="/users/forgotpassword">Forgot password?</a>
+                              </form>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<div class="tab-pane active" *ngIf="otpPanel">
+    <div class="row">
+        <div class="col-xl-12">
+            <section class="login-form">
+                <div class="container logintu">
+                    <div class="tool">
+                        <div class="row">
+                            <div class="col-xs-12 form-center-focused">
+                                <h2 class="section-title">Hi, {{user?.name}}</h2>
+                                <div class="alert" role="alert"></div>
+                                <form #loginSms="ngForm" novalidate class="new-project">
+                                    <div class="form-group" *ngIf="user?.pinstatus">
+                                        <label for="pin">Enter your secret pin</label>
+                                        <input type="password" id="pin" name="pin" [(ngModel)]="otpObj.pin" #pin="ngModel" title='Please enter your secret pin.'
+                                            tabindex="1" class="form-control" required placeholder='Secret Pin' />
+                                    </div>
+                                    <div class="form-group" *ngIf="user?.twofastatus && !user?.pinstatus">
+                                        <label for="code">Enter your two factor authentication code</label>
+                                        <input type="password" id="code" name="code" [(ngModel)]="otpObj.code" #code="ngModel" title='Please enter your two factor authentication code.'
+                                            tabindex="1" class="form-control" required placeholder='Code' />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="otp">Enter your OTP</label>
+                                        <input type="text" id="otp" name="otp" [(ngModel)]="otpObj.otp" #otp="ngModel" tabindex="1" class="form-control" required
+                                            placeholder='OTP'><div [ngClass]="{
+                                              'errormsg': otp.invalid && (otp.dirty || otp.touched),
+                                              'has-success': otp.valid && (otp.dirty || otp.touched)}" *ngIf="otp.errors && (otp.dirty || otp.touched)">
+                                            <p class="sm-font" *ngIf="otp.errors.required">OTP is required</p>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="d-flex justify-content-between">
+                                        <input type="hidden" name="phone" [(ngModel)]="otpObj.phone" #phone="ngModel">
+                                        <button class="btn btn-primary" (click)="loginOtpfn()" [disabled]="loginSms.invalid" type="submit">Log
+                                            In
+                                        </button>
+                                    </div>
+                                    <br>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<div *ngIf="emailTFApanel" class="two-f-container">
+        <div class="tab-pane active">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tool tool-profile">
+                        <h5 class="text-center text-underline">Two-Factor Authentication</h5>
+                        <div class="row set-margin" style="padding: 0 25px;">
+                            <div class="col-xs-12 form-center-focused">
+                                <form #emailTFA="ngForm" novalidate >
+                                    <div class="row set-bottom-padding-30">
+                                        <div class="col-xl-12">
+                                            <div class="text-left"><span class="dark-text">Please enter the 6 digit verification code from Google Authenticator..</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="row set-bottom-padding-30">
+                                        <div class="col-xl-12">
+                                            <div class="text-left"><span class="dark-text">Enter 2FA code from the app</span></div>
+                                        </div>
+                                        <div class="col-xl-12">
+                                            <input id="code" class="form-control" name="code" maxlength="6" [(ngModel)]="emailVerifyTFA.code" #code="ngModel"
+                                            title="Please enter Google Authenticator code." tabindex="1" type="text" required="required">
+                                            <div [ngClass]="{
+                                              'errormsg': code.invalid && (code.dirty || code.touched),
+                                              'has-success': code.valid && (code.dirty || code.touched)}" *ngIf="code.errors && (code.dirty || code.touched)">
+                                            <p class="sm-font" *ngIf="code.errors.required">OTP is required</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="row set-bottom-padding-30">
+                                        <div class="col-xl-12">
+                                            <div style="max-width:170px">
+                                                <button id="submit" type="submit" (click)="twofaByEmail()" [disabled]="emailTFA.invalid" class="btn btn-primary btn-block">Verify</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

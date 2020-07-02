@@ -1,0 +1,520 @@
+<div class="tab-pane active">
+    <div class="row">
+        <div class="col-xl-8">
+            <div class="tool tool-balance">
+                <h5>Balance</h5>
+                <div class="list d-flex justify-content-md-between  flex-wrap flex-md-nowrap">
+                    <div class="item">
+                        <span class="name">Last Price</span>
+                        <span class="val">1.3254 USD</span>
+                    </div>
+                    <div class="item">
+                        <span class="name">24H Change</span>
+                        <span class="val down">-15.3%</span>
+                        <!--up -->
+                    </div>
+                    <div class="item">
+                        <span class="name">24H High</span>
+                        <span class="val">1.58 USD</span>
+                    </div>
+                    <div class="item">
+                        <span class="name">24H Low</span>
+                        <span class="val">1.31 USD</span>
+                    </div>
+                    <div class="item">
+                        <span class="name">24H Volume</span>
+                        <span class="val">174092083.52 USD</span>
+                    </div>
+                    <div class="item big align-self-center">
+                        <div class="bg">
+                            <span class="value">51.32797006 XRP</span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-5">
+                        <img src=".././assets/images/demo/image.png" class="img-fluid" style="height:265px" />
+                    </div>
+                    <div class="col-md-7">
+                        <img src=".././assets/images/demo/_card.png" class="img-fluid" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4">
+            <div class="tool tool-buy-sell">
+                <ul class="nav buy-sell justify-content-center" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link buy" data-toggle="tab" role="tab" ng-class="{active: (buySell.selectedMenu==='buy')}" ng-click="buySell.selectedMenu='buy'"><i
+                                class="dashboard-icon dashboard-icon-buy"></i>Buy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link sell" data-toggle="tab" role="tab" ng-class="{active: (buySell.selectedMenu==='sell')}" ng-click="buySell.selectedMenu='sell'"><i
+                                class="dashboard-icon dashboard-icon-sell"></i>Sell</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="buy" role="tabpanel" ng-class="{active: (buySell.selectedMenu==='buy')}">
+                        <div class="container">
+                            <ul class="list currencies d-flex justify-content-center text-center">
+                                <li ng-class="[{active: (buySell.currencyConvert==='TRY')}, selectedCurrency]" ng-click="buySell.currencyConvert='TRY'">
+                                    <span class="currency-name">{{selectedCurrency}}/TRY</span>
+                                    <span class="currency-val">4.7815</span>
+                                </li>
+                                <li ng-class="[{active: (buySell.currencyConvert==='USD')},selectedCurrency]" ng-click="buySell.currencyConvert='USD'">
+                                    <span class="currency-name">{{selectedCurrency}}/USD</span>
+                                    <span class="currency-val">4.7815</span>
+                                </li>
+                                <li ng-class="[{active: (buySell.currencyConvert==='EUR')},selectedCurrency]" ng-click="buySell.currencyConvert='EUR'">
+                                    <span class="currency-name">{{selectedCurrency}}/EUR</span>
+                                    <span class="currency-val">4.7815</span>
+                                </li>
+                                <li ng-class="[{active: (buySell.currencyConvert==='BTC')},selectedCurrency]" ng-click="buySell.currencyConvert='BTC'" ng-if="selectedCurrency!=='BTC'">
+                                    <span class="currency-name">{{selectedCurrency}}/BTC</span>
+                                    <span class="currency-val">0.00054554</span>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+
+                            <form>
+                                <div class="form-group">
+                                    <label class="text-center m-auto d-block">Abiable: <span class="val">0.00 USD</span></label>
+                                    <input type="text" class="form-control form-control-right" placeholder="0,0 TRY">
+                                </div>
+
+
+
+                                <div class="d-flex justify-content-around text-center">
+                                    <div>
+                                        <span class="d-block name">Subtotal</span>
+                                        <span class="d-block va1">0.00 USD</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block name">Xtremcoin Fee</span>
+                                        <span class="d-block va1">0.25 %</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block name">Approx. XRP Receive</span>
+                                        <span class="d-block va1">0.00</span>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-success  d-block">Buy {{selectedCurrency}}</button>
+
+                            </form>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="tab-pane " id="sell" role="tabpanel" ng-class="{active: (buySell.selectedMenu==='sell')}">
+                        <div class="container">
+                            <ul class="list currencies d-flex justify-content-around text-center">
+                                <li ng-class="[{active: (buySell.currencyConvert==='TRY')}, selectedCurrency]" ng-click="buySell.currencyConvert='TRY'">
+                                    <span class="currency-name">{{selectedCurrency}}/TRY</span>
+                                    <span class="currency-val">4.7815</span>
+                                </li>
+                                <li ng-class="[{active: (buySell.currencyConvert==='USD')}, selectedCurrency]" ng-click="buySell.currencyConvert='USD'">
+                                    <span class="currency-name">{{selectedCurrency}}/USD</span>
+                                    <span class="currency-val">4.7815</span>
+                                </li>
+                                <li ng-class="[{active: (buySell.currencyConvert==='EUR')}, selectedCurrency]" ng-click="buySell.currencyConvert='EUR'">
+                                    <span class="currency-name">{{selectedCurrency}}/EUR</span>
+                                    <span class="currency-val">4.7815</span>
+                                </li>
+                                <li ng-class="[{active: (buySell.currencyConvert==='BTC')}, selectedCurrency]" ng-click="buySell.currencyConvert='BTC'" ng-if="selectedCurrency!=='BTC'">
+                                    <span class="currency-name">{{selectedCurrency}}/BTC</span>
+                                    <span class="currency-val">0.00054554</span>
+                                </li>
+                            </ul>
+
+                            <div class="clearfix"></div>
+
+                            <form>
+                                <div class="form-group">
+                                    <label class="text-center m-auto d-block">Abiable: <span class="val">0.00 USD</span></label>
+                                    <input type="text" class="form-control form-control-right" placeholder="0,0 TRY">
+                                </div>
+
+
+
+                                <div class="d-flex justify-content-around text-center">
+                                    <div>
+                                        <span class="d-block name">Subtotal</span>
+                                        <span class="d-block va1">0.00</span>
+                                        <span class="d-block va1">USD</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block name">Xtremcoin Fee</span>
+                                        <span class="d-block va1">0.25</span>
+                                        <span class="d-block va1">%</span>
+                                    </div>
+                                    <div>
+                                        <span class="d-block name">Approx. XRP Receive</span>
+                                        <span class="d-block va1">0.0</span>
+                                        <span class="d-block va1">0</span>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-danger  d-block">Sell {{selectedCurrency}}</button>
+
+                            </form>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-8">
+            <div class="tool tool-currencies">
+                <h5>Currencies</h5>
+                <div class="table-responsive-sm">
+                    <table class="dashboard-table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">SYMBOL</th>
+                                <th>NAME</th>
+                                <th>AVAILABLE BALANCE</th>
+                                <th>PENDING</th>
+                                <th>ON ORDERS</th>
+                                <th class="text-right">BTC VALUE</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><img src=".././assets/images/icons/btc-s.png" class="va-t"> BTC</td>
+                                <td>Bitcoin</td>
+                                <td class="text-right">0.00345653453</td>
+                                <td class="text-center">-</td>
+                                <td class="text-right">0</td>
+                                <td>0.000000053</td>
+                                <td class="text-center" width="170px"><button class="btn btn-secondary btn-sm">Deposit</button><button
+                                        class="btn btn-primary btn-sm ml-1">Witdraw</button></td>
+                            </tr>
+                            <tr>
+                                <td><img src=".././assets/images/icons/xrp-s.png" class="va-t"> XRP</td>
+                                <td>Ripple</td>
+                                <td class="text-right">0.00345653453</td>
+                                <td class="text-center">-</td>
+                                <td class="text-right">0</td>
+                                <td>0.000000053</td>
+                                <td class="text-center"><button class="btn btn-secondary btn-sm">Deposit</button><button
+                                        class="btn btn-primary btn-sm ml-1">Witdraw</button></td>
+                            </tr>
+                            <tr>
+                                <td><img src=".././assets/images/icons/xtr-s.png" class="va-t"> XTR</td>
+                                <td>ETH</td>
+                                <td class="text-right">0.00345653453</td>
+                                <td class="text-center">-</td>
+                                <td class="text-right">0</td>
+                                <td>0.000000053</td>
+                                <td class="text-center"><button class="btn btn-secondary btn-sm">Deposit</button><button
+                                        class="btn btn-primary btn-sm ml-1">Witdraw</button></td>
+                            </tr>
+                            <tr>
+                                <td><img src=".././assets/images/icons/eth-s.png" class="va-t"> ETH</td>
+                                <td>Etherium</td>
+                                <td class="text-right">0.00345653453</td>
+                                <td class="text-center">-</td>
+                                <td class="text-right">0</td>
+                                <td>0.000000053</td>
+                                <td class="text-center"><button class="btn btn-secondary btn-sm">Deposit</button><button
+                                        class="btn btn-primary btn-sm ml-1">Witdraw</button></td>
+                            </tr>
+                            <tr>
+                                <td><img src=".././assets/images/icons/ltc-s.png" class="va-t"> LTC</td>
+                                <td>LiteCoin</td>
+                                <td class="text-right">0.00345653453</td>
+                                <td class="text-center">-</td>
+                                <td class="text-right">0</td>
+                                <td>0.000000053</td>
+                                <td class="text-center"><button class="btn btn-secondary btn-sm">Deposit</button><button
+                                        class="btn btn-primary btn-sm ml-1">Witdraw</button></td>
+                            </tr>
+                            <tr>
+                                <td><img src=".././assets/images/icons/bch-s.png" class="va-t"> BCH</td>
+                                <td>Bitcoin Cash</td>
+                                <td class="text-right">0.00345653453</td>
+                                <td class="text-center">-</td>
+                                <td class="text-right">0</td>
+                                <td>0.000000053</td>
+                                <td class="text-center"><button class="btn btn-secondary btn-sm">Deposit</button><button
+                                        class="btn btn-primary btn-sm ml-1">Witdraw</button></td>
+                            </tr>
+                            <tr>
+                                <td><img src=".././assets/images/icons/try-s.png" class="va-t"> TRY</td>
+                                <td>Turkısh Lira</td>
+                                <td class="text-right">0.00345653453</td>
+                                <td class="text-center">-</td>
+                                <td class="text-right">0</td>
+                                <td>0.000000053</td>
+                                <td class="text-center"><button class="btn btn-secondary btn-sm">Deposit</button><button
+                                        class="btn btn-primary btn-sm ml-1">Witdraw</button></td>
+                            </tr>
+                            <tr>
+                                <td><img src=".././assets/images/icons/eur-s.png" class="va-t"> EUR</td>
+                                <td>Euro</td>
+                                <td class="text-right">0.00345653453</td>
+                                <td class="text-center">-</td>
+                                <td class="text-right">0</td>
+                                <td>0.000000053</td>
+                                <td class="text-center"><button class="btn btn-secondary btn-sm">Deposit</button><button
+                                        class="btn btn-primary btn-sm ml-1">Witdraw</button></td>
+                            </tr>
+                            <tr>
+                                <td><img src=".././assets/images/icons/usd-s.png" class="va-t"> USD</td>
+                                <td>United States Dollar</td>
+                                <td class="text-right">0.00345653453</td>
+                                <td class="text-center">-</td>
+                                <td class="text-right">0</td>
+                                <td>0.000000053</td>
+                                <td class="text-center"><button class="btn btn-secondary btn-sm">Deposit</button><button
+                                        class="btn btn-primary btn-sm ml-1">Witdraw</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4">
+            <div class="tool tool-buy-orders">
+                <h5>Buy Orders <span class="desc up"> <span class="name">Total</span> <span class="val">15.000 EUR</span>
+                        </span></h5>
+
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>PRICE</th>
+                            <th>AMOUNT</th>
+                            <th>MY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>250 EUR</td>
+                            <td>0.00345653453 BTC</td>
+                            <td>-</td>
+                        </tr>
+                        <tr class="table-success">
+                            <td>250 EUR</td>
+                            <td>0.00345653453 BTC</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>250 EUR</td>
+                            <td>0.00345653453 BTC</td>
+                            <td>-</td>
+                        </tr>
+                        <tr class="table-danger">
+                            <td>250 EUR</td>
+                            <td>0.00345653453 BTC</td>
+                            <td>-</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <h5>Sell Orders <span class="desc down"> <span class="name">Total</span> <span class="val">15.000 EUR</span></span></h5>
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>PRICE</th>
+                            <th>AMOUNT</th>
+                            <th>MY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>250 EUR</td>
+                            <td>0.00345653453 BTC</td>
+                            <td>-</td>
+                        </tr>
+                        <tr class="table-danger">
+                            <td>250 EUR</td>
+                            <td>0.00345653453 BTC</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>250 EUR</td>
+                            <td>0.00345653453 BTC</td>
+                            <td>-</td>
+                        </tr>
+                        <tr class="table-success">
+                            <td>250 EUR</td>
+                            <td>0.00345653453 BTC</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>250 EUR</td>
+                            <td>0.00345653453 BTC</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-xl-4">
+            <div class="tool tool-activities">
+                <h5>Activities</h5>
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th colspan="3" class="text-center">23 JUNE , 2017</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-right">0.00355454654545 BTC</td>
+                            <td width="20px"><span class="dashboard-icon dashboard-icon-withdraw"></span></td>
+                            <td class="text-left">ASKFO342234234JSDFJ</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">0.00355454654545 BTC</td>
+                            <td width="20px"><span class="dashboard-icon dashboard-icon-deposit"></span></td>
+                            <td class="text-left">ASKFO342234234JSDFJ</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">0.00355454654545 BTC</td>
+                            <td width="20px"><span class="dashboard-icon dashboard-icon-withdraw"></span></td>
+                            <td class="text-left">ASKFO342234234JSDFJ</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">0.00355454654545 BTC</td>
+                            <td width="20px"><span class="dashboard-icon dashboard-icon-deposit"></span></td>
+                            <td class="text-left">ASKFO342234234JSDFJ</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">0.00355454654545 BTC</td>
+                            <td width="20px"><span class="dashboard-icon dashboard-icon-deposit"></span></td>
+                            <td class="text-left">ASKFO342234234JSDFJ</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th colspan="3" class="text-center">22 JUNE , 2017</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-right">0.00355454654545 BTC</td>
+                            <td width="20px"><span class="dashboard-icon dashboard-icon-withdraw"></span></td>
+                            <td class="text-left">ASKFO342234234JSDFJ</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">0.00355454654545 BTC</td>
+                            <td width="20px"><span class="dashboard-icon dashboard-icon-deposit"></span></td>
+                            <td class="text-left">ASKFO342234234JSDFJ</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">0.00355454654545 BTC</td>
+                            <td width="20px"><span class="dashboard-icon dashboard-icon-deposit"></span></td>
+                            <td class="text-left">ASKFO342234234JSDFJ</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th colspan="3" class="text-center">21 JUNE , 2017</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-right">0.00355454654545 BTC</td>
+                            <td width="20px"><span class="dashboard-icon dashboard-icon-withdraw"></span></td>
+                            <td class="text-left">ASKFO342234234JSDFJ</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">0.00355454654545 BTC</td>
+                            <td width="20px"><span class="dashboard-icon dashboard-icon-deposit"></span></td>
+                            <td class="text-left">ASKFO342234234JSDFJ</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-xl-8">
+            <div class="tool tool-credit-cards">
+                <h5>Credit Cards
+                    <div class="dropdown show">
+                        <a class="dropdown-toggle" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="view">View</span> <span class="title">5532 **** **** 4543</span>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="#">card2</a>
+                            <a class="dropdown-item" href="#">card2</a>
+                        </div>
+                    </div>
+                </h5>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="credit-card">
+                                <img src=".././assets/images/credit-card-bg.png" class="img-fluid " />
+                                <div class="credit-card-number">5532 5678 9123 4543</div>
+                                <div class="credit-card-holder">
+                                    <span class="name">CARD HOLDER</span>
+                                    <span class="val">Name Surname</span>
+                                </div>
+                                <div class="credit-card-expires">
+                                    <span class="name">EXPIRES</span>
+                                    <span class="val">01 / 23</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="credit-card-summary mt-4">
+                                <table class="table table-sm">
+                                    <tbody>
+                                        <tr>
+                                            <th>Credit Available</th>
+                                            <td class="val">8,500.00 USD</td>
+                                            <td class="info">Demand</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Available Cash</th>
+                                            <td class="val">500.00 USD</td>
+                                            <td class="info"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Outstanding Balance</th>
+                                            <td class="val">800.00 USD</td>
+                                            <td class="info">Split</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total Debpt</th>
+                                            <td class="val">4,200.00 USD</td>
+                                            <td class="info">Split</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="bottom">Cutoff Date</th>
+                                            <td class="bottom val">12.11.2017</td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                                <button type="submit" class="btn btn-danger pull-right  d-block mt-5">Buy XRP</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

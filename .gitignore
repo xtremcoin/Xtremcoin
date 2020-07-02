@@ -1,0 +1,59 @@
+# SERVER RELATED FILES
+/server/node_modules/
+/server/.idea
+/server/db/
+/server/package-lock.json
+/server/_cnf.json
+/server/sendgrid.env
+/server/newrelic_agent.log
+/server/var
+/server/process.json
+/server/public/upload/
+/server/public/charts/
+/server/public/support_ticket_media/
+
+
+
+
+
+# CLIENT RELATED FILES
+# compiled output
+/client/dist
+/client/tmp
+/client/out-tsc
+
+# dependencies
+/client/node_modules
+
+# misc
+/client/.sass-cache
+/client/connect.lock
+/client/coverage
+/client/libpeerconnection.log
+/clientnpm-debug.log
+/clientyarn-error.log
+/clienttestem.log
+/client/typings
+
+# System Files
+/client.DS_Store
+/clientThumbs.db
+
+
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+

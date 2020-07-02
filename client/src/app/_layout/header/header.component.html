@@ -1,0 +1,63 @@
+<header class="navbar navbar-expand-lg navbar-light flex-column flex-md-row bd-navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand mr-0 mr-md-2" href="/">
+      <img src="./assets/images/logo.png">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobileMenu" aria-controls="mobileMenu"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="mobileMenu">
+      <ul class="navbar-nav mx-auto w-100 justify-content-center primary-nav">
+        <li *ngIf="authApi.isLoggedIn()" class="nav-item active">
+          <a class="nav-link" href="user">Account</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="exchange.html">Exchange</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="card.html">Card</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="wallet.html">Wallet</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="merchants.html">Merchants</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="tradeview.html">Tradeview</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto d-flex align-items-lg-center">
+        <li class="nav-item lang">
+          <a class="nav-link" href="merchants.html">TR</a>/<a class="nav-link" href="contact.html">EN</a>
+        </li>
+        <li *ngIf="!authApi.isLoggedIn()" class="mx-auto nav-item">
+          <button type="button" routerLink='/login' class="btn btn-outline-primary sign-in-button">Login</button>
+        </li>
+        <li *ngIf="authApi.isLoggedIn()" class="nav-item">
+            <div class="dropdown profile-dropdown">
+              <button class="btn btn-outline-primary profile-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Profile
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" routerLink="/user/profile/account-setting" role="tab">Setting</a>
+                <a class="dropdown-item" routerLink="/user/profile/twfa" role="tab">Google 2FA</a>
+                <a class="dropdown-item" routerLink="/user/profile/transaction" role="tab">Transaction</a>
+                <a class="dropdown-item" routerLink="/user/profile/login-logs" role="tab">Login Logs</a>
+                <a class="dropdown-item" routerLink="/user/profile/change-password" role="tab">Change Password</a>
+                <a class="dropdown-item" routerLink="/user/profile/kyc" role="tab">AML/KYC Verification</a>
+                <a class="dropdown-item" routerLink="" role="tab">Linked Card</a>
+                <a class="dropdown-item" routerLink="" style="cursor:pointer;" (click)="authApi.logout()" role="tab">Logout</a>
+                <a class="dropdown-item" routerLink="" role="tab">Referral</a>
+                <a class="dropdown-item" routerLink="/user/profile/wallet-api" role="tab">Wallet API</a>
+              </div>
+            </div>
+          </li>
+      </ul>
+    </div>
+  </div>
+</header>

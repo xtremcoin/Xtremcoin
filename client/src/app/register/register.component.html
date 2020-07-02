@@ -1,0 +1,259 @@
+<div class="tab-pane active" *ngIf="signuppanel">
+  <div class="row">
+      <div class="col-xl-12">
+          <section id="register" class="login-form">
+              <div class="container logintu">
+                  <div class="tool">
+                      <div class="row">
+                          <div class="col-sm-12 form-center-focused">
+                              <h2 class="section-title">Sign Up</h2>
+                              <form #signupForm="ngForm" novalidate class="new-project">
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label for="firstname">First Name</label>
+                                              <input type="text" id="firstname" name="firstname" [(ngModel)]="userObj.firstname"
+                                                #firstname="ngModel" placeholder="First Name" class="form-control" pattern="^[A-Za-z]+$"
+                                                     tabindex="1" required/>
+                                                     <div [ngClass]="{
+                                                      'errormsg': firstname.invalid && (firstname.dirty || firstname.touched),
+                                                      'has-success': firstname.valid && (firstname.dirty || firstname.touched)}"
+                                                      *ngIf="firstname.errors && (firstname.dirty || firstname.touched)">
+                                                      <p class="sm-font" *ngIf="firstname.errors.required">First name is required</p>
+                                                      <p class="sm-font" *ngIf="firstname.errors.pattern">First name not valid</p>
+                                                      </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label for="surname">Surname</label>
+                                              <input type="text" id="surname" name="surname" [(ngModel)]="userObj.surname" pattern="^[A-Za-z]+$"
+                                                     placeholder="Surname" class="form-control" tabindex="2" #surname="ngModel"
+                                                     required/>
+                                                     <div [ngClass]="{
+                                                      'errormsg': surname.invalid && (surname.dirty || surname.touched),
+                                                      'has-success': surname.valid && (surname.dirty || surname.touched)}"
+                                                      *ngIf="surname.errors && (surname.dirty || surname.touched)">
+                                                      <p class="sm-font" *ngIf="surname.errors.required">Surname is required</p>
+                                                      <p class="sm-font" *ngIf="surname.errors.pattern">Surname not valid</p>
+                                                      </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                          <div class="form-group">
+                                              <label for="email">Email</label>
+                                              <input type="email" id="email" name="email" [(ngModel)]="userObj.email"
+                                                     placeholder='Email' class="form-control" #email="ngModel"
+                                                     pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                                     tabindex="3"
+                                                     required/>
+                                                    <div [ngClass]="{
+                                                    'errormsg': email.invalid && (email.dirty || email.touched),
+                                                    'has-success': email.valid && (email.dirty || email.touched)}"
+                                                    *ngIf="email.errors && (email.dirty || email.touched)">
+                                                    <p class="sm-font" *ngIf="email.errors.required">Email is required</p>
+                                                    <p class="sm-font" *ngIf="email.errors.pattern">Please enter a valid email</p>
+                                                    </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <label for="password">Password</label>
+                                          <input type="password" id="password" name="password" required minlength="8"
+                                                 placeholder="Password" tabindex="4" [(ngModel)]="userObj.password" #password="ngModel"
+                                                 pattern="((^)(^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$|^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-]).{6,}$|^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$|^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$))+$"
+                                                 (keyup)="clearError('password');checkpassword(userObj.password)" class="form-control"/>
+                                                 <div [ngClass]="{
+                                                  'errormsg': password.invalid && (password.dirty || password.touched),
+                                                  'has-success': password.valid && (password.dirty || password.touched)}"
+                                                  *ngIf="password.errors && (password.dirty || password.touched)">
+                                                  <p class="sm-font" *ngIf="password.errors.required">Password is required</p>
+                                                  <p class="sm-font" *ngIf="password.errors.pattern">Not a combination of a-z, A-Z, 0-9, @</p>
+                                                  </div>
+                                                  <div *ngIf="errMsg.password!==''">
+                                                      <span class="sm-font">{{errMsg.password}}</span>
+                                                  </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <label for="passwordrepeat">Repeat password</label>
+                                          <input type="password" id="passwordrepeat" name="passwordrepeat" [(ngModel)]="userObj.passwordrepeat"
+                                                placeholder="Repeat password" class="form-control" tabindex="5" #passwordrepeat="ngModel"
+                                                (keydown)="clearError('passwordrepeat')" (blur)="matchPassword(userObj)" required/>
+                                                <div [ngClass]="{
+                                                  'errormsg': passwordrepeat.invalid && (passwordrepeat.dirty || passwordrepeat.touched),
+                                                  'has-success': passwordrepeat.valid && (passwordrepeat.dirty || passwordrepeat.touched)}"
+                                                  *ngIf="passwordrepeat.errors && (passwordrepeat.dirty || passwordrepeat.touched)">
+                                                <p class="sm-font" *ngIf="passwordrepeat.errors.required">Repeat password is required</p>
+                                                </div>
+                                                <div *ngIf="errMsg.passwordrepeat!==''">
+                                                    <span class="sm-font">{{errMsg.passwordrepeat}}</span>
+                                                </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                          <span class="inst">Min 8 character, at least 1 uppercase & lowercase<br> at least 1 special character & number.</span>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                            <label for="phone">Phone Number</label>
+                                            <input type="text"
+                                            class="form-control"
+                                            name="phone" id="phone"
+                                            [(ngModel)]="userObj.phone"
+                                            #phone="ngModel"
+                                            placeholder="Phone"
+                                            ng2TelInput
+                                            [ng2TelInputOptions]="{initialCountry: IPcountryCode}"
+                                            (ng2TelOutput)="getNumber($event)"/>
+                                       <div [ngClass]="{
+                                        'errormsg': phone.invalid && (phone.dirty || phone.touched),
+                                        'has-success': phone.valid && (phone.dirty || phone.touched)}"
+                                         *ngIf="phone.errors && (phone.dirty || phone.touched)">
+                                        <p class="sm-font" *ngIf="phone.errors.required">Phone is required</p>
+                                    </div>
+                                    </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                          <div class="clearfix">
+                                              <label for="acceptTerms" class="pull-left checkbox-inline">
+                                                  <input style="width: 20px !important" type="checkbox" id="acceptTerms" name="acceptterms"
+                                                         value="true"
+                                                         checked="checked" tabindex="6"/>
+                                                  I read and accept the <a href="#" target="_blank">Terms & Conditions</a></label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-7">
+                                          <div class="form-group">
+                                            <re-captcha
+                                            [(ngModel)]="declarativeFormCaptchaValue"
+                                            name="captcha"
+                                            class="form-control"
+                                            required
+                                            ></re-captcha>
+                                            <input type="hidden" class="form-control" name="_csrf"
+                                            [(ngModel)]="userObj._csrf" #_csrf="ngModel">
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                          <div class="form-group">
+                                              <button type="submit" [disabled]="signupForm.invalid" (click)="signupFn()" class="btn btn-primary" >Sign Up</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+      </div>
+  </div>
+</div>
+<div class="tab-pane active" *ngIf="smsVerfication">
+    <div class="row">
+        <div class="col-xl-12">
+            <section class="login-form">
+                <div class="container logintu">
+                    <div class="tool">
+                        <div class="row">
+                            <div class="col-xs-12 form-center-focused">
+                                <h2 class="section-title" translate>Phone Verification</h2>
+                                <form #signupForm="ngForm" novalidate >
+                                    <div class="alert" role="alert" translate></div>
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="form-group">
+                                            <div class="text-left">
+                                                <label>
+                                                <span class="dark-text">
+                                                <ul>
+                                                    <li translate>The verification code sent to your phone number.</li>
+                                                    <li translate>Please keep your keep your phone locked & safe.</li>
+                                                    <li><strong translate>If you have not gotten an authentication code, please resubmit signup form.</strong></li>
+                                                </ul>
+                                                </span></label>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="form-group">
+                                            <label for="verificationotp"><span class="dark-text" translate>Enter code from SMS</span></label>
+                                            <input id="verificationotp" name="verificationotp" [(ngModel)]="otpObj.otp"
+                                            #otp="ngModel" class="form-control" value="" title="Please enter your authentication key." type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="form-group">
+                                                <button class="btn btn-primary" (click)=submitOTP() type="submit" translate>Verify</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<div class="tab-pane active" *ngIf="thanksPanel">
+    <div class="row">
+        <div class="col-xl-12">
+<section class="login-form">
+    <div class="container">
+        <div class="tool">
+        <div class="row">
+            <div class="col-xs-12 form-center-focused">
+                <h2 class="section-title" translate>Sign Up done!</h2>
+                <form class="success-signup">
+                    <p class="success">Thank you for signing up. Please check your<b> {{otpObj.email}}</b> mailbox for email confirmation letter and further instructions. Please note that the letter may be in SPAM folder.
+                    </p>
+                    <p class="success mt30">
+                        <a class="btn btn-primary" routerLink="/login" (click)="thanksPanel=false" translate>Back</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+</div></div></div>
+<div class="tab-pane active" *ngIf="emailVerifyPanel">
+    <div class="row">
+        <div class="col-xl-12">
+<section class="login-form">
+    <div class="container">
+        <div class="tool">
+        <div class="row">
+            <div class="col-xs-12 form-center-focused">
+                <form class="success-signup">
+                    <p class="message">
+                        {{message}}
+                    </p>
+                    <p class="success mt30">
+                        <a class="btn btn-primary" href="/login">Login</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+        </div></div></div>

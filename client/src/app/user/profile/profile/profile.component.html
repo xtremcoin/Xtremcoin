@@ -1,0 +1,56 @@
+<div class="tab-pane active">
+  <div class="row">
+    <div class="col-lg-3 d-none d-lg-block">
+      <ul class="nav nav-sidebar-primary" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/user/profile/account-setting" routerLinkActive="active" role="tab">Account
+            Setting</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" ui-sref="profile.transaction" role="tab">Bank Information</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/user/profile/twfa" routerLinkActive="active" role="tab"> 2FA</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" ui-sref="profile.transaction" role="tab">Secret Pin</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" ui-sref="profile.transaction" role="tab">Open Orders</a>
+            </li>
+        <li class="nav-item">
+          <a class="nav-link" ui-sref="profile.transaction" role="tab">Transaction</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " ui-sref="profile.login-logs" role="tab">Login Logs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " ui-sref="profile.change-password" role="tab">Change Password</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " routerLink="/user/profile/kyc" routerLinkActive="active">AML/KYC Verification</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " ui-sref="profile.setting" role="tab">Linked Card</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " ui-sref="profile.setting" role="tab">Logout</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " ui-sref="profile.referral" role="tab">Referral</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " ui-sref="profile.walletapi" role="tab">Wallet API</a>
+        </li>
+      </ul>
+
+    </div>
+    <div class="col-lg-9 col-md-12">
+      <div class="tab-content">
+        <div ui-view>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

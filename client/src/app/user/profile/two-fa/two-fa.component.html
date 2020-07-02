@@ -1,0 +1,122 @@
+<div *ngIf="tfaPanel" class="tab-pane active">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tool tool-profile">
+                <h5 class="text-center text-underline">Enable Two-Factor Authentication</h5>
+                <div class="row set-margin">
+                    <div class="row set-bottom-padding-30">
+                        <div class="col-xl-12">
+                            <div class="circle-number"><span>1</span></div>
+                            <div class="text-left left-text"><span class="dark-text">Download App</span></div>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="left-margin-content">
+                                <img src="/assets/images/app-store-badge.png" alt="">
+                                <img src="/assets/images/google-play-badge.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row set-bottom-padding-30">
+                        <div class="col-xl-12">
+                            <div class="circle-number"><span>2</span></div>
+                            <div class="text-left left-text"><span class="dark-text">Scan QR Code</span></div>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="row left-margin-content">
+                                <div class="col-md-4 col-sm-12">
+                                    <img src="{{twofaObj?.qcode}}" alt="">
+                                </div>
+                                <div class="col-md-6 col-sm-12 left-margin-content">
+                                    <p>ACCOUNT TOKEN:</p>
+                                    <p class="dark-text">{{twofaObj?.secret}}</p>
+                                    <button class="btn btn-outline-primary profile-button " type="button">
+                                        <i class="fa fa-print"></i> Print a backup
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form novalidate #tfaForm="ngForm">
+                        <div class="row set-bottom-padding-30">
+                            <div class="col-xl-12">
+                                <div class="circle-number"><span>3</span></div>
+                                <div class="text-left left-text"><span class="dark-text">Enter 2FA code from the app</span></div>
+                            </div>
+                            <div class="col-xl-12">
+                                <div class="left-margin-content">
+                                    <input autocomplete="off" pattern="^[0-9]+$" [(ngModel)]="createTFA.code" #code="ngModel"
+                                        required name="code" title="Please enter your state" tabindex="10" class="form-control"
+                                        autocomplete="off" placeholder='Type Code' type="text">
+                                    <div [ngClass]="{
+                                      'errormsg': code.invalid && (code.dirty || code.touched),
+                                      'has-success': code.valid && (code.dirty || code.touched)}"
+                                        *ngIf="code.errors && (code.dirty || code.touched)">
+                                        <p class="sm-font" *ngIf="code.errors.required">Code is required</p>
+                                        <p class="sm-font" *ngIf="code.errors.pattern">Not a code</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row set-bottom-padding-30">
+                            <div class="col-xl-12">
+                                <label class="primary-checkbox">I have backed up my 16-DIGIT K <a href="#" class="pink">Printed
+                                        copy of it </a> and put it in a safe place.
+                                    <input autocomplete="off" type="checkbox" required name="backupCheck" checked
+                                        [(ngModel)]="createTFA.backupCheck" #backupCheck="ngModel">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-xl-12">
+                                <div style="max-width:170px">
+                                    <button type="submit" (click)="twofafn()" [disabled]="tfaForm.invalid" class="btn btn-primary btn-block">Enable</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="tfaDisable" class="tab-pane active">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tool tool-profile">
+                <h5 class="text-center text-underline">Disable Two-Factor Authentication</h5>
+                <div class="row set-margin">
+                    <div class="col-xs-12">
+                        <form novalidate #tfaDisableForm="ngForm">
+                            <div class="row set-bottom-padding-30">
+                                <div class="col-xl-12">
+                                    <div class="text-left left-text"><span class="dark-text">Enter 2FA code
+                                            from the app</span></div>
+                                </div>
+                                <div class="col-xl-12">
+                                    <div class="left-margin-content">
+                                            <input autocomplete="off" pattern="^[0-9]+$" [(ngModel)]="twofaDisableObj.code" #code="ngModel"
+                                            required name="code" title="Please enter your state" tabindex="10" class="form-control" maxlength="6"
+                                            autocomplete="off" placeholder='Type Code' type="text">
+                                        <div [ngClass]="{
+                                          'errormsg': code.invalid && (code.dirty || code.touched),
+                                          'has-success': code.valid && (code.dirty || code.touched)}"
+                                            *ngIf="code.errors && (code.dirty || code.touched)">
+                                            <p class="sm-font" *ngIf="code.errors.required">Code is required</p>
+                                            <p class="sm-font" *ngIf="code.errors.pattern">Not a code</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row set-bottom-padding-30">
+                                <div class="col-xl-12">
+                                    <div class="left-margin-content" style="max-width:170px">
+                                        <button type="submit" (click)="twofaDisablefn()" [disabled]="tfaDisableForm.invalid" class="btn btn-primary btn-block">Disable</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,476 @@
+<div *ngIf="profilePanel" class="tab-pane active">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tool tool-profile">
+        <h5 class="text-center text-underline">Account Setting </h5>
+        <div class="row set-margin">
+          <div class="row set-bottom-padding-30 set-full-width">
+            <div class="col-md-12 col-xs-12">
+              <div class="row set-margin">
+                <ul>
+                  <li>
+                    Your contact details are below
+                  </li>
+                  <li>
+                    Click the “Edit” button to update your details or change security options.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="row set-bottom-padding-30 set-full-width">
+            <div class="col-md-12 col-xs-12">
+              <div class="row set-margin bottom-line">
+                <div class="setting-cell">
+                  <div class="circle-icon "><i class="fa fa-envelope-o"></i>
+                  </div>
+                </div>
+                <div class="setting-cell">
+                  <span><strong>Email</strong></span>
+                  <span>{{profileObj?.email}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-xs-12">
+              <div class="row set-margin bottom-line">
+                <div class="setting-cell">
+                  <div class="circle-icon "><i class="fa fa-user"></i>
+                  </div>
+                </div>
+                <div class="setting-cell">
+                  <span><strong>Name</strong></span>
+                  <span>{{profileObj?.profile?.name}} {{profileObj?.profile?.surName}}</span>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-md-12 col-xs-12">
+              <div class="row set-margin bottom-line">
+                <div class="setting-cell">
+                  <div class="circle-icon "><i class="fa fa-map-marker"></i>
+                  </div>
+                </div>
+                <div class="setting-cell">
+                  <span><strong>Country</strong></span>
+                  <span>{{profileObj?.profile?.country}}</span>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-12 col-xs-12">
+              <div class="row set-margin bottom-line">
+                <div class="setting-cell">
+                  <div class="circle-icon "><i class="fa fa-calendar-o"></i>
+                  </div>
+                </div>
+                <div class="setting-cell">
+                  <span><strong>Date Of birth</strong></span>
+                  <span>{{profileObj?.profile?.dob}}</span>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-12 col-xs-12">
+              <div class="row set-margin bottom-line">
+                <div class="setting-cell">
+                  <div class="circle-icon "><i class="fa fa-mobile"></i>
+                  </div>
+                </div>
+                <div class="setting-cell">
+                  <span><strong>Phone</strong></span>
+                  <span>{{profileObj?.profile?.phone}}</span>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-12 col-xs-12">
+              <div class="row set-margin bottom-line">
+                <div class="setting-cell">
+                  <div class="circle-icon "><i class="fa fa-mobile"></i>
+                  </div>
+                </div>
+                <div class="setting-cell">
+                  <span><strong>Address</strong></span>
+                  <span>{{profileObj?.profile?.address}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-xs-12">
+              <div class="row set-margin bottom-line">
+                <div class="setting-cell">
+                  <div class="circle-icon "><i class="fa fa-map-marker"></i>
+                  </div>
+                </div>
+                <div class="setting-cell">
+                  <span><strong>Address</strong></span>
+                  <span>{{profileObj?.profile?.address1}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-xs-12">
+              <div class="row set-margin bottom-line">
+                <div class="setting-cell">
+                  <div class="circle-icon "><i class="fa fa-map-marker"></i>
+                  </div>
+                </div>
+                <div class="setting-cell">
+                  <span><strong>Town/City</strong></span>
+                  <span>{{profileObj?.profile?.city}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-xs-12">
+              <div class="row set-margin bottom-line">
+                <div class="setting-cell">
+                  <div class="circle-icon "><i class="fa fa-map-marker"></i>
+                  </div>
+                </div>
+                <div class="setting-cell">
+                  <span><strong>Region/State</strong></span>
+                  <span>{{profileObj?.profile?.state}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-xs-12">
+              <div class="row set-margin bottom-line">
+                <div class="setting-cell">
+                  <div class="circle-icon "><i class="fa fa-newspaper-o"></i>
+                  </div>
+                </div>
+                <div class="setting-cell">
+                  <span><strong>Accept newsletter</strong></span>
+                  <span *ngIf="profileObj?.profile?.acceptNews == 0">No</span>
+                  <span *ngIf="profileObj?.profile?.acceptNews == 1">Yes</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-xs-12">
+              <div class="row set-margin justify-content-end">
+                <div class="button-holder">
+                  <button type="submit" (click)="profilePanel=false;editProfilePanel=true" class="btn btn-primary btn-block">Edit</button>
+                </div>
+                <button class="btn btn-outline-primary profile-button " type="button">
+                  Change Password
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="editProfilePanel" class="tab-pane active">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tool tool-deposit">
+        <h5 class="text-center">Update Profile</h5>
+        <div class="row set-margin">
+          <div class="col-md-12">
+            <div class="content">
+              <form #updateForm="ngForm" novalidate class="new-project">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="col-md-6">
+                      <div class="wrap_input">
+                        <label for="person_type" class="label">Profile Type</label>
+                        <select class="form-control select" id="person_type" name="person_type" title="Please select type of account"
+                          placeholder="Type of profile" [(ngModel)]="updateObj.person_type" #person_type="ngModel">
+                          <option value="Private person">Private person</option>
+                          <option value="Company person">Company person</option>
+                          <option value="Bank person">Bank person</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="wrap_input">
+                        <label for="name" class="label">First name</label>
+                        <input autocomplete="off" required class="form-control" id="name" name="name" title="Please enter your name"
+                          placeholder='First name' pattern="^[A-Za-z]+$" tabindex="2" [(ngModel)]="updateObj.name"
+                          #name="ngModel" type="text">
+                        <div [ngClass]="{
+                              'errormsg': name.invalid && (name.dirty || name.touched),
+                              'has-success': name.valid && (name.dirty || name.touched)}"
+                          *ngIf="name.errors && (name.dirty || name.touched)">
+                          <p class="sm-font" *ngIf="name.errors.required">First name is required</p>
+                          <p class="sm-font" *ngIf="name.errors.pattern">First name not valid</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="col-md-6">
+                      <div class="wrap_input">
+                        <label for="midName" class="label">Middle name</label>
+                        <input autocomplete="off" required class="form-control" id="midName" name="midName" title="Please enter your middle name"
+                          placeholder='Middle name' tabindex="2" [(ngModel)]="updateObj.midName" #midName="ngModel"
+                          type="text">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="wrap_input">
+                        <label for="surName" class="label">Last Name</label>
+                        <input autocomplete="off" pattern="^[A-Za-z]+$" required class="form-control" name="surname"
+                          title="Please enter your surname" placeholder='Last name' [(ngModel)]="updateObj.surName"
+                          #surName="ngModel" tabindex="3" type="text">
+                        <div [ngClass]="{
+                              'errormsg': surName.invalid && (surName.dirty || surName.touched),
+                              'has-success': surName.valid && (surName.dirty || surName.touched)}"
+                          *ngIf="surName.errors && (surName.dirty || surName.touched)">
+                          <p class="sm-font" *ngIf="surName.errors.required">Last name is required</p>
+                          <p class="sm-font" *ngIf="surName.errors.pattern">Last name not valid</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="col-md-6">
+                      <div class="wrap_input">
+                        <label for="dob" class="label">Date of Birth</label>
+                        <input autocomplete="off" required name="dob" title="Please enter your date of birth" type="date"
+                          class="form-control" [(ngModel)]="updateObj.dob" #dob="ngModel" max="2010-11-05" min="1940-12-01">
+                        <div [ngClass]="{
+                            'errormsg': dob.invalid && (dob.dirty || dob.touched),
+                            'has-success': dob.valid && (dob.dirty || dob.touched)}"
+                          *ngIf="dob.errors && (dob.dirty || dob.touched)">
+                          <p class="sm-font" *ngIf="dob.errors.required">Date of Birth is required</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="wrap_input">
+                        <label for="sex">Sex</label>
+                        <select class="form-control" id="sex" name="sex" [(ngModel)]="updateObj.sex" #sex="ngModel"
+                          required>
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="col-md-6">
+                      <div class="wrap_input">
+                        <label for="address" class="label">Address</label>
+                        <input type="text" name="address" class="form-control" title="Please enter your address"
+                          required autocomplete="off" placeholder='Address' [(ngModel)]="updateObj.address" #address="ngModel"
+                          tabindex="7">
+                        <div [ngClass]="{
+                            'errormsg': address.invalid && (address.dirty || address.touched),
+                            'has-success': address.valid && (address.dirty || address.touched)}"
+                          *ngIf="address.errors && (address.dirty || address.touched)">
+                          <p class="sm-font" *ngIf="address.errors.required">Address is required</p>
+                          <p class="sm-font" *ngIf="address.errors.pattern">Not an address</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="wrap_input">
+                        <label for="address1" class="label">Address1</label>
+                        <input type="text" name="address1" class="form-control" title="Please enter your address1"
+                          required autocomplete="off" placeholder='Address' [(ngModel)]="updateObj.address1" #address1="ngModel"
+                          tabindex="8">
+                        <div [ngClass]="{
+                            'errormsg': address1.invalid && (address1.dirty || address1.touched),
+                            'has-success': address1.valid && (address1.dirty || address1.touched)}"
+                          *ngIf="address1.errors && (address1.dirty || address1.touched)">
+                          <p class="sm-font" *ngIf="address1.errors.required">Address is required</p>
+                          <p class="sm-font" *ngIf="address1.errors.pattern">Not an address</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="col-md-6">
+                      <div class="wrap_input">
+                        <label for="city" class="label">Town/City</label>
+                        <input type="text" name="city" pattern="^[A-Za-z]+$" class="form-control" title="Please enter your city"
+                          required autocomplete="off" placeholder='City' [(ngModel)]="updateObj.city" #city="ngModel"
+                          tabindex="9">
+                        <div [ngClass]="{
+                            'errormsg': city.invalid && (city.dirty || city.touched),
+                            'has-success': city.valid && (city.dirty || city.touched)}"
+                          *ngIf="city.errors && (city.dirty || city.touched)">
+                          <p class="sm-font" *ngIf="city.errors.required">Town/City is required</p>
+                          <p class="sm-font" *ngIf="city.errors.pattern">Not a Town/City</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="wrap_input">
+                        <label for="postal" class="label">Postal</label>
+                        <input autocomplete="off" pattern="^[0-9]+$" [(ngModel)]="updateObj.postal" #postal="ngModel"
+                          required name="postal" title="Please enter your postal" tabindex="10" class="form-control"
+                          autocomplete="off" placeholder='Postal' type="text">
+                        <div [ngClass]="{
+                            'errormsg': postal.invalid && (postal.dirty || postal.touched),
+                            'has-success': postal.valid && (postal.dirty || postal.touched)}"
+                          *ngIf="postal.errors && (postal.dirty || postal.touched)">
+                          <p class="sm-font" *ngIf="postal.errors.required">Postal is required</p>
+                          <p class="sm-font" *ngIf="postal.errors.pattern">Not a Postal</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="col-md-6">
+                      <div class="wrap_input">
+                        <label for="state" class="label">Region/State</label>
+                        <input autocomplete="off" pattern="^[A-Za-z]+$" [(ngModel)]="updateObj.state" #state="ngModel"
+                          required name="state" title="Please enter your state" tabindex="10" class="form-control"
+                          autocomplete="off" placeholder='State' type="text">
+                        <div [ngClass]="{
+                                  'errormsg': state.invalid && (state.dirty || state.touched),
+                                  'has-success': state.valid && (state.dirty || state.touched)}"
+                          *ngIf="state.errors && (state.dirty || state.touched)">
+                          <p class="sm-font" *ngIf="state.errors.required">Region/State is required</p>
+                          <p class="sm-font" *ngIf="state.errors.pattern">Not an Region/State</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="wrap_input">
+                        <label for="country">Country</label>
+                        <select class="form-control" id="country" name="country" [(ngModel)]="updateObj.country"
+                          #country="ngModel" required>
+                          <option [ngValue]="undefined" selected>Select Country</option>
+                          <option *ngFor="let item of countrylist" value="{{item.code}}">
+                            {{item.name}}
+                          </option>
+                        </select>
+                        <div [ngClass]="{
+                                                'errormsg': country.invalid && (country.dirty || country.touched),
+                                                'has-success': country.valid && (country.dirty || country.touched)}"
+                          *ngIf="country.errors && (country.dirty || country.touched)">
+                          <p class="sm-font" *ngIf="country.errors.required">Country is required</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--<div class="row" style="margin-top: 20px;">
+                                    <div class="col-md-12">
+                                        <div class="col-md-3">
+                                            <img class="pull-left"
+                                                 src="/vassets/images/security.png"
+                                                 alt="Security">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <label class="primary-checkbox">{{'SMS authentication' |}}
+                                                <input autocomplete="off" type="radio" required="required"
+                                                       id="user2ndFactorAuthType_1"
+                                                       name="user2ndFactorAuthType" value="sms" checked="checked">
+                                                <span class="checkmark"></span>
+                                            </label><br>
+                                            <label class="primary-checkbox">{{'Email authentication' |}}
+                                                <input autocomplete="off" type="radio" required="required"
+                                                       id="user2ndFactorAuthType_3"
+                                                       name="user2ndFactorAuthType" value="email">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <span class="error_message"></span>
+                                        </div>
+                                    </div>
+                                </div>-->
+                <div class="row" style="margin-top: 20px;">
+                  <div class="col-md-12">
+                    <div class="col-md-12">
+                      <label class="primary-checkbox">I accept to receive XTRemCoin
+                        newsletter.
+                        <input autocomplete="off" type="checkbox" required="required" name="acceptNews" checked
+                          [(ngModel)]="updateObj.acceptNews" #acceptNews="ngModel">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="margin-top: 15px;margin-bottom: 15px;">
+                  <div class="col-md-12">
+                    <div class="col-md-4">
+                      <button class="btn btn-primary btn-block" (click)="updatefn()" [disabled]="updateForm.invalid"
+                        type="submit">Update
+                        Profile
+                      </button>
+                    </div>
+                    <button class="btn btn-outline-primary profile-button" (click)="profilePanel=true;editProfilePanel=false"
+                      type="button">
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf='tfaPanel' class="two-f-container">
+  <div class="tab-pane active">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tool tool-profile">
+          <h5 class="text-center text-underline">Second factor authentication</h5>
+          <div class="row set-margin" style="padding: 0 25px;">
+            <div class="col-xs-12">
+              <form #updateVerifyForm="ngForm" novalidate class="new-project">
+                <div class="row set-bottom-padding-30">
+                  <div class="col-xl-12">
+                    <div class="text-left"><span class="dark-text">
+                        <ul>
+                          <li>The verification code sent to your phone number.</li>
+                          <li>Please keep your keep your phone locked & safe.</li>
+                          <li><strong>If you have not gotten an authentication code, please resubmit update form.</strong></li>
+                        </ul>
+                      </span></div>
+                  </div>
+                </div>
+                <div class="row set-bottom-padding-30">
+                  <div class="col-xl-12">
+                    <div class="text-left"><span class="dark-text">Enter code from SMS</span></div>
+                  </div>
+                  <div class="col-xl-12">
+                    <input id="secondauthKey" name="secondauthKey" class="form-control" [(ngModel)]="updateVerify.secondauthKey"
+                      #secondauthKey="ngModel" title="Please enter your secound factor authentication key." tabindex="1"
+                      type="text" required>
+                    <div [ngClass]="{
+                                        'errormsg': secondauthKey.invalid && (secondauthKey.dirty || secondauthKey.touched),
+                                        'has-success': secondauthKey.valid && (secondauthKey.dirty || secondauthKey.touched)}"
+                      *ngIf="secondauthKey.errors && (secondauthKey.dirty || secondauthKey.touched)">
+                      <p class="sm-font" *ngIf="secondauthKey.errors.required">Key is required</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row set-bottom-padding-30">
+                  <div class="col-xl-12">
+                    <div style="max-width:170px">
+                      <button id="submit" type="submit" (click)="updateConfirm()" [disabled]="updateVerifyForm.invalid"
+                        class="btn btn-primary btn-block">Verify</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

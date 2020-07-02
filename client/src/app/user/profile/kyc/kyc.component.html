@@ -1,0 +1,728 @@
+<div *ngIf="personalKYCPanel" class="tab-pane active">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tool tool-deposit">
+        <h5 class="text-center text-underline">Upload KYC Personal</h5>
+        <div class="row set-margin">
+          <div class="col-md-12">
+            <div class="content">
+              <form novalidate #kycIndividual="ngForm" enctype="multipart/form-data">
+                <legend>Identity Proof</legend>
+                <div class="row margin-b-20">
+                  <div class="col-md-6">
+                    <div class="wrap_input mt15">
+                      <select id="idProof" name="idProof" title="Please choose Identity Type" class="form-control"
+                        [(ngModel)]="credentialsForPersonal.idProof" #idProof="ngModel" required tabindex="1">
+                        <option [ngValue]="undefined" selected>Please select...</option>
+                        <option *ngFor="let type of idtypes" selected [value]="type">{{ type }}</option>
+                      </select>
+                      <div class="" [ngClass]="{
+                        '': idProof.invalid && (idProof.dirty || idProof.touched),
+                        'has-success': idProof.valid && (idProof.dirty || idProof.touched)}"
+                        *ngIf="idProof.errors && (idProof.dirty || idProof.touched)">
+                        <p class="sm-font" *ngIf="idProof.errors.required">ID type is required.</p>
+                      </div>
+                    </div>
+                    <div class="typecontainer_p">
+                      <div class="wrap_input req mt15">
+                        <label class="label" for="idNumber">{{credentialsForPersonal.idProof}}<span class="label" *ngIf="credentialsForPersonal.idProof">
+                            Number:</span></label>
+                        <input type="text" class="form-control" name="idNumber" tabindex="2" [(ngModel)]="credentialsForPersonal.idNumber"
+                          #idNumber="ngModel" required>
+                        <div class="" [ngClass]="{
+                        '': idNumber.invalid && (idNumber.dirty || idNumber.touched),
+                        'has-success': idNumber.valid && (idNumber.dirty || idNumber.touched)}"
+                          *ngIf="idNumber.errors && (idNumber.dirty || idNumber.touched)">
+                          <p class="sm-font" *ngIf="idNumber.errors.required">ID Number is required.</p>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="wrap_input req mt15">
+                        <input type="file" class="form-control" id="fileDocumentid" name="fileDocumentid" (change)="selectFileid($event)"
+                          tabindex="3" required accept=".jpeg,.jpg,.png,.pdf">
+                        <div>
+                          <p class="sm-font">{{fileerror['fileDocumentid']}}</p>
+                          <p class="sm-font">{{error['fileDocumentid']}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="wrap_input mt15">
+                      <span class="parameter-annotation">
+                        <ul>
+                          <li><b>Supported NationalID</b></li>
+                          <li>France - InseeNumber</li>
+                          <li>Turkey - Türkiye Cumhuriyeti Kimlik Numarası (T.C. Kimlik No.)</li>
+                          <li><b>Note:</b> Documents are mandatory to verify account, please upload.</li>
+                          <li><b>Note:</b> File should of type jpg,png,pdf and less then 3 MB in size</li>
+                        </ul>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <legend>Address Proof</legend>
+                <div class="row margin-b-20">
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <select class="form-control" name="addressProof" tabindex="5" id="addressProof" [(ngModel)]="credentialsForPersonal.addressProof"
+                        #addressProof="ngModel" required>
+                        <option [ngValue]="undefined" selected>Please select...</option>
+                        <option *ngFor="let type of addressTypes" selected [value]="type">{{ type }}</option>
+                      </select>
+                      <div class="" [ngClass]="{
+                    '': addressProof.invalid && (addressProof.dirty || addressProof.touched),
+                    'has-success': addressProof.valid && (addressProof.dirty || addressProof.touched)}"
+                        *ngIf="addressProof.errors && (addressProof.dirty || addressProof.touched)">
+                        <p class="sm-font" *ngIf="addressProof.errors.required">Address Type is required.</p>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="wrap_input req mt15">
+                      <input type="file" class="form-control" id="fileDocumentaddress" name="fileDocumentaddress"
+                        (change)="selectFileadd($event)" accept=".jpeg,.jpg,.png,.pdf" tabindex="6" required>
+                      <div>
+                        <p class="sm-font">{{fileerror['fileDocumentaddress']}}</p>
+                        <p class="sm-font">{{error['fileDocumentaddress']}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="wrap_input mt15">
+                      <span class="parameter-annotation">
+                        <ul>
+                          <li><b>Note:</b></li>
+                          <li>Please upload any of these documents: Electcricity / Water / Telephone bills for your
+                            address proof.</li>
+                          <li><b>Note:</b> File should of type jpg,png,pdf and less then 3 MB in size</li>
+                        </ul>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top:20px;">
+                    <div class="col-md-12 text-centered">
+                      <button id="p_submit" class="btn btn-orange btn-primary" tabindex="6" type="submit" (click)="privateKycfn()"
+                        [disabled]="kycIndividual.invalid">Verify
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="companyKYCPanel" class="tab-pane active">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tool tool-deposit">
+        <h5 class="text-center text-underline">Upload KYC Company</h5>
+        <div class="row set-margin">
+          <div class="col-md-12">
+            <div class="content">
+              <form novalidate #kycCompanyForm="ngForm" enctype="multipart/form-data">
+                <legend>Company Detail</legend>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label for="companyname">Company name:</label>
+                      <input type="text" class="form-control" id="companyname" name="companyname" tabindex="1"
+                        [(ngModel)]="credentialsForMerchant.companyname" #companyname="ngModel" required minlength="5">
+                      <div class="" [ngClass]="{
+                      '': companyname.invalid && (companyname.dirty || companyname.touched),
+                      'has-success': companyname.valid && (companyname.dirty || companyname.touched)}"
+                        *ngIf="companyname.errors && (companyname.dirty || companyname.touched)">
+                        <p class="sm-font" *ngIf="companyname.errors.required">Company name is required</p>
+                        <p class="sm-font" *ngIf="companyname.errors.minlength">Name must be at least 5 characters
+                          long.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label">Registration number:</label>
+                      <input type="text" class="form-control" id="registration_number" name="registration_number"
+                        tabindex="2" [(ngModel)]="credentialsForMerchant.registration_number" #registration_number="ngModel"
+                        required>
+                      <div class="" [ngClass]="{
+                     '': registration_number.invalid && (registration_number.dirty || registration_number.touched),
+                     'has-success': registration_number.valid && (registration_number.dirty || registration_number.touched)}"
+                        *ngIf="registration_number.errors && (registration_number.dirty || registration_number.touched)">
+                        <p class="sm-font" *ngIf="registration_number.errors.required">Registration number is required.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label">CEO or Manager first name:</label>
+                      <input autocomplete="off" class="form-control" required id="c_ceo_name" name="ceoname" ng-value="profile.name"
+                        title="Please enter CEO or Manager name" [(ngModel)]="credentialsForMerchant.ceoname" #ceoname="ngModel"
+                        type="text">
+                      <div class="" [ngClass]="{
+                          '': ceoname.invalid && (ceoname.dirty || ceoname.touched),
+                          'has-success': ceoname.valid && (ceoname.dirty || ceoname.touched)}"
+                        *ngIf="ceoname.errors && (ceoname.dirty || ceoname.touched)">
+                        <p class="sm-font" *ngIf="ceoname.errors.required">CEO first name is required.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label">CEO or Manager last name:</label>
+                      <input autocomplete="off" class="form-control" required id="c_ceo_lastname" name="ceolastname"
+                        [(ngModel)]="credentialsForMerchant.ceolastname" #ceolastname="ngModel" title="Please enter CEO or Manager lastname"
+                        type="text">
+                      <div class="" [ngClass]="{
+                          '': ceolastname.invalid && (ceolastname.dirty || ceolastname.touched),
+                          'has-success': ceolastname.valid && (ceolastname.dirty || ceolastname.touched)}"
+                        *ngIf="ceolastname.errors && (ceolastname.dirty || ceolastname.touched)">
+                        <p class="sm-font" *ngIf="ceolastname.errors.required">CEO last name is required.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label">Company email:</label>
+                      <input autocomplete="off" class="form-control" required id="c_company_email" name="email"
+                        [(ngModel)]="credentialsForMerchant.email" #email="ngModel" title="Please enter company email"
+                        pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" type="text">
+                      <div class="" [ngClass]="{
+                          '': email.invalid && (email.dirty || email.touched),
+                          'has-success': email.valid && (email.dirty || email.touched)}"
+                        *ngIf="email.errors && (email.dirty || email.touched)">
+                        <p class="sm-font" *ngIf="email.errors.required">Email is required.</p>
+                        <p class="sm-font" *ngIf="email.errors.pattern">Not a valid email.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label">Date of birth:</label>
+                      <input autocomplete="off" class="form-control" required id="c_dateOfBirth" name="dateOfBirth" max="2010-11-05" min="1940-12-01"
+                        [(ngModel)]="credentialsForMerchant.dateOfBirth" #dateOfBirth="ngModel" title="Please enter company email"
+                        type="date">
+                      <div class="" [ngClass]="{
+                          '': dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched),
+                          'has-success': dateOfBirth.valid && (dateOfBirth.dirty || dateOfBirth.touched)}"
+                        *ngIf="dateOfBirth.errors && (dateOfBirth.dirty || dateOfBirth.touched)">
+                        <p class="sm-font" *ngIf="dateOfBirth.errors.required">Date of birth is required.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="phone">Phone Number</label>
+                      <input type="text" class="form-control" name="phone" id="phone" [(ngModel)]="credentialsForMerchant.phone"
+                        #phone="ngModel" placeholder="Phone" ng2TelInput [ng2TelInputOptions]="{initialCountry: 'TR'}"
+                        (ng2TelOutput)="getNumber($event)" />
+                      <div [ngClass]="{
+                  'errormsg': phone.invalid && (phone.dirty || phone.touched),
+                  'has-success': phone.valid && (phone.dirty || phone.touched)}"
+                        *ngIf="phone.errors && (phone.dirty || phone.touched)">
+                        <p class="sm-font" *ngIf="phone.errors.required">Phone is required</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <legend translate>Company Address Detail</legend>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label" translate>Address 1:</label>
+                      <input type="text" class="form-control" id="address" name="address" tabindex="6" [(ngModel)]="credentialsForMerchant.address"
+                        #address="ngModel" required>
+                      <div [ngClass]="{
+                  '': address.invalid && (address.dirty || address.touched),
+                  'has-success': address.valid && (address.dirty || address.touched)}"
+                        *ngIf="address.errors && (address.dirty || address.touched)">
+                        <p class="sm-font" *ngIf="address.errors.required">Address is required.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label">Postal code:</label>
+                      <input type="text" class="form-control" id="postal" name="postal" tabindex="7" [(ngModel)]="credentialsForMerchant.postalcode"
+                        #postal="ngModel" required>
+                      <div  [ngClass]="{
+                    '': postal.invalid && (postal.dirty || postal.touched),
+                    'has-success': postal.valid && (postal.dirty || postal.touched)}"
+                        *ngIf="postal.errors && (postal.dirty || postal.touched)">
+                        <p class="sm-font" *ngIf="postal.errors.required">Postal is required.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label" translate>City:</label>
+                      <input type="text" class="form-control" id="city" name="city" tabindex="8" [(ngModel)]="credentialsForMerchant.city"
+                        #city="ngModel" required>
+                      <div  [ngClass]="{
+                  '': city.invalid && (city.dirty || city.touched),
+                  'has-success': city.valid && (city.dirty || city.touched)}"
+                        *ngIf="city.errors && (city.dirty || city.touched)">
+                        <p class="sm-font" *ngIf="city.errors.required">City is required.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label" translate>State/Province:</label>
+                      <input type="text" class="form-control" id="province" name="province" tabindex="9" [(ngModel)]="credentialsForMerchant.province"
+                        #province="ngModel" required>
+                      <div [ngClass]="{
+                    '': province.invalid && (province.dirty || province.touched),
+                    'has-success': province.valid && (province.dirty || province.touched)}"
+                        *ngIf="province.errors && (province.dirty || province.touched)">
+                        <p class="sm-font" *ngIf="province.errors.required">State is required.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row margin-b-20">
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label" translate>Company country:</label>
+                      <input type="text" class="form-control" id="country" name="country" tabindex="10" [(ngModel)]="credentialsForMerchant.country"
+                        #country="ngModel" required>
+                      <div [ngClass]="{
+                    '': country.invalid && (country.dirty || country.touched),
+                    'has-success': country.valid && (country.dirty || country.touched)}"
+                        *ngIf="country.errors && (country.dirty || country.touched)">
+                        <p class="sm-font" *ngIf="country.errors.required">Company country is required.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6"></div>
+                </div>
+                <legend>Company Documents</legend>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15 display-flex">
+                      <label class="label">Company registration:</label>
+                      <input type="file" class="form-control" id="fileDocumentRegistration" name="fileDocumentRegistration"
+                        (change)="selectFileReg($event)" accept=".jpeg,.jpg,.png,.pdf" tabindex="6" required>
+                      <div>
+                        <p class="sm-font">{{fileerror['fileDocumentRegistration']}}</p>
+                        <p class="sm-font">{{error['fileDocumentRegistration']}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="wrap_input mt15">
+                      <span class="parameter-annotation">
+                        <ul>
+                          <li><b>Note:</b> 'Company Incorporation/Registration document only'</li>
+                        </ul>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15 display-flex">
+                      <label class="label">Bank statement/receipt:</label>
+                      <input type="file" class="form-control" id="fileDocumentBank" name="fileDocumentBank" (change)="selectFileBank($event)"
+                        accept=".jpeg,.jpg,.png,.pdf" tabindex="6" required>
+                      <div>
+                        <p class="sm-font">{{fileerror['fileDocumentBank']}}</p>
+                        <p class="sm-font">{{error['fileDocumentBank']}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="wrap_input mt15">
+                      <span class="parameter-annotation">
+                        <ul>
+                          <li><b>Note:</b> 'Bank statement or receipt for current month, must have company
+                            name.' </li>
+                        </ul>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15 display-flex">
+                      <label class="label">Manager confirmation:</label>
+                      <input type="file" class="form-control" id="fileDocumentAppointment" name="fileDocumentAppointment"
+                        (change)="selectFileMang($event)" accept=".jpeg,.jpg,.png,.pdf" tabindex="6" required>
+                      <div>
+                        <p class="sm-font">{{fileerror['fileDocumentAppointment']}}</p>
+                        <p class="sm-font">{{error['fileDocumentAppointment']}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="wrap_input mt15">
+                      <span class="parameter-annotation">
+                        <ul>
+                          <li><b>Note:</b> 'Manager appointment letter should be on company letter head,
+                            signed and company seal.'</li>
+                        </ul>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row margin-b-20">
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15 display-flex">
+                      <label class="label">Tax document:</label>
+                      <input type="file" class="form-control" id="fileDocumentTax" name="fileDocumentTax" (change)="selectFileTax($event)"
+                        accept=".jpeg,.jpg,.png,.pdf" tabindex="6" required>
+                      <div>
+                        <p class="sm-font">{{fileerror['fileDocumentTax']}}</p>
+                        <p class="sm-font">{{error['fileDocumentTax']}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="wrap_input mt15">
+                      <span class="parameter-annotation">
+                        <ul>
+                          <li><b>Note:</b> 'Tax Record document or Tax payment document for Company'
+                          </li>
+                        </ul>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <legend>Address Proof</legend>
+                <div class="row margin-b-20">
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <select class="form-control" name="addressProof" tabindex="5" id="addressProof" [(ngModel)]="credentialsForMerchant.addressProof"
+                        #addressProof="ngModel" required>
+                        <option [ngValue]="undefined" selected>Please select...</option>
+                        <option *ngFor="let type of addressTypes" selected [value]="type">{{ type }}</option>
+                      </select>
+                      <div class="" [ngClass]="{
+                    '': addressProof.invalid && (addressProof.dirty || addressProof.touched),
+                    'has-success': addressProof.valid && (addressProof.dirty || addressProof.touched)}"
+                        *ngIf="addressProof.errors && (addressProof.dirty || addressProof.touched)">
+                        <p class="sm-font" *ngIf="addressProof.errors.required">Address Type is required.</p>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="wrap_input req mt15 display-flex">
+                      <input type="file" class="form-control" id="fileDocumentaddress" name="fileDocumentaddress"
+                        (change)="selectFileAdd($event)" accept=".jpeg,.jpg,.png,.pdf" tabindex="6" required>
+                      <div>
+                        <p class="sm-font">{{fileerror['fileDocumentAddress']}}</p>
+                        <p class="sm-font">{{error['fileDocumentAddress']}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="wrap_input mt15">
+                      <span class="parameter-annotation">
+                        <ul>
+                          <li><b>Note:</b></li>
+                          <li>Please upload any of these documents: Electcricity / Water / Telephone bills
+                            for your address proof.</li>
+                        </ul>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <legend>Manager ID Proof</legend>
+                <div class="row margin-b-20">
+                  <div class="col-md-6">
+                    <div class="wrap_input mt15">
+                      <select id="idProof" name="idProof" title="Please choose Identity Type" class="form-control"
+                        [(ngModel)]="credentialsForMerchant.idProof" #idProof="ngModel" required tabindex="1">
+                        <option [ngValue]="undefined" selected>Please select...</option>
+                        <option *ngFor="let type of idtypes" selected [value]="type">{{ type }}</option>
+                      </select>
+                      <div class="" [ngClass]="{
+                        '': idProof.invalid && (idProof.dirty || idProof.touched),
+                        'has-success': idProof.valid && (idProof.dirty || idProof.touched)}"
+                        *ngIf="idProof.errors && (idProof.dirty || idProof.touched)">
+                        <p class="sm-font" *ngIf="idProof.errors.required">ID type is required.</p>
+                      </div>
+                    </div>
+                    <div class="typecontainer_p">
+                      <div class="wrap_input req mt15">
+                        <label class="label" for="idNumber">{{credentialsForMerchant.idProof}}<span class="label" *ngIf="credentialsForPersonal.idProof">
+                            Number:</span></label>
+                        <input type="text" class="form-control" name="idNumber" tabindex="2" [(ngModel)]="credentialsForMerchant.idNumber"
+                          #idNumber="ngModel" required>
+                        <div class="" [ngClass]="{
+                      '': idNumber.invalid && (idNumber.dirty || idNumber.touched),
+                      'has-success': idNumber.valid && (idNumber.dirty || idNumber.touched)}"
+                          *ngIf="idNumber.errors && (idNumber.dirty || idNumber.touched)">
+                          <p class="sm-font" *ngIf="idNumber.errors.required">ID Number is required.</p>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="wrap_input req mt15 display-flex">
+                        <input type="file" class="form-control" id="bankid" name="bankid" (change)="selectFileID($event)"
+                          accept=".jpeg,.jpg,.png,.pdf" tabindex="6" required>
+                        <div>
+                          <p class="sm-font">{{fileerror['fileDocumentId']}}</p>
+                          <p class="sm-font">{{error['fileDocumentId']}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="wrap_input mt15">
+                      <span class="parameter-annotation">
+                        <ul>
+                          <li><b>Supported NationalID</b></li>
+                          <li>France - InseeNumber</li>
+                          <li>Turkey - Türkiye Cumhuriyeti Kimlik Numarası (T.C. Kimlik No.)</li>
+                          <li><b>Note:</b>Documents are mandatory to verify account, please upload.
+                          </li>
+                          <li><b>Note:</b> File should of type jpg,png,pdf and less then 3 MB in size</li>
+                        </ul>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top:20px;">
+                    <div class="col-md-12 text-centered">
+                      <button id="p_submit" class="btn btn-orange btn-primary" tabindex="6" type="submit" (click)="CompnayKycfn()"
+                        [disabled]="kycCompanyForm.invalid">Verify
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="bankKYCPanel" class="tab-pane active">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tool tool-deposit">
+        <h5 class="text-center text-underline">Upload KYC Bank/Institution</h5>
+        <div class="row set-margin">
+          <div class="col-md-12">
+            <div class="content">
+              <form novalidate #kycBankForm="ngForm" enctype="multipart/form-data">
+                <legend>Bank Detail</legend>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label">Bank:</label>
+                      <select required id="b_bank" name="bank" title="Bank Name" class="custom-select bank" [(ngModel)]="credentialsForBank.bank" #bank="ngModel">
+                        <option value="">Select Bank</option>
+                        <option *ngFor="let item of banks" value="{{item.bankId}}">{{item.bank}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="wrap_input">
+                      <label class="label">Bank Email:</label>
+                      <div class="input-group req mt15 display-flex">
+                        <input autocomplete="off" class="form-control" required id="b_bank_email" name="email" value="" [(ngModel)]="credentialsForBank.email" #email="ngModel"
+                          title="Please enter bank email" type="text" class="form-control">
+                        <div class="input-group-append">
+                          <span class="input-group-text" id="bankemail_postfix">{{bankJson[bank]?.domain?bankJson[bank]?.domain:"@selectbank.com"}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label">CEO or Manager first name:</label>
+                      <input autocomplete="off" class="form-control" required id="c_ceo_name" name="ceoname" ng-value="profile.name"
+                        title="Please enter CEO or Manager name" [(ngModel)]="credentialsForBank.ceoname" #ceoname="ngModel"
+                        type="text">
+                      <div class="" [ngClass]="{
+                          '': ceoname.invalid && (ceoname.dirty || ceoname.touched),
+                          'has-success': ceoname.valid && (ceoname.dirty || ceoname.touched)}"
+                        *ngIf="ceoname.errors && (ceoname.dirty || ceoname.touched)">
+                        <p class="sm-font" *ngIf="ceoname.errors.required">CEO first name is required.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label">CEO or Manager last name:</label>
+                      <input autocomplete="off" class="form-control" required id="c_ceo_lastname" name="ceolastname"
+                        [(ngModel)]="credentialsForBank.ceolastname" #ceolastname="ngModel" title="Please enter CEO or Manager lastname"
+                        type="text">
+                      <div class="" [ngClass]="{
+                          '': ceolastname.invalid && (ceolastname.dirty || ceolastname.touched),
+                          'has-success': ceolastname.valid && (ceolastname.dirty || ceolastname.touched)}"
+                        *ngIf="ceolastname.errors && (ceolastname.dirty || ceolastname.touched)">
+                        <p class="sm-font" *ngIf="ceolastname.errors.required">CEO last name is required.</p>
+                      </div>
+                  </div>
+                </div>
+              </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label">Date of birth:</label>
+                      <input autocomplete="off" class="form-control" required id="c_dateOfBirth" name="dateOfBirth" max="2010-11-05" min="1940-12-01"
+                        [(ngModel)]="credentialsForBank.dateOfBirth" #dateOfBirth="ngModel" title="Please enter company email"
+                        type="date">
+                      <div class="" [ngClass]="{
+                          '': dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched),
+                          'has-success': dateOfBirth.valid && (dateOfBirth.dirty || dateOfBirth.touched)}"
+                        *ngIf="dateOfBirth.errors && (dateOfBirth.dirty || dateOfBirth.touched)">
+                        <p class="sm-font" *ngIf="dateOfBirth.errors.required">Date of birth is required.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label">Phone Number:</label>
+                      <input type="text" class="form-control" name="phone" id="phone" [(ngModel)]="credentialsForBank.phone"
+                        #phone="ngModel" placeholder="Phone" ng2TelInput [ng2TelInputOptions]="{initialCountry: 'TR'}"
+                        (ng2TelOutput)="getNumber($event)" />
+                      <div [ngClass]="{
+                  'errormsg': phone.invalid && (phone.dirty || phone.touched),
+                  'has-success': phone.valid && (phone.dirty || phone.touched)}"
+                        *ngIf="phone.errors && (phone.dirty || phone.touched)">
+                        <p class="sm-font" *ngIf="phone.errors.required">Phone is required</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <legend>Bank Address Detail</legend>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label">Address 1:</label>
+                      <input type="text" class="form-control" id="address" name="address" tabindex="6" [(ngModel)]="credentialsForBank.address"
+                        #address="ngModel" required>
+                      <div [ngClass]="{
+                  '': address.invalid && (address.dirty || address.touched),
+                  'has-success': address.valid && (address.dirty || address.touched)}"
+                        *ngIf="address.errors && (address.dirty || address.touched)">
+                        <p class="sm-font" *ngIf="address.errors.required">Address is required.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label">Postal code:</label>
+                      <input type="text" class="form-control" id="postal" name="postal" tabindex="7" [(ngModel)]="credentialsForBank.postalcode"
+                        #postal="ngModel" required>
+                      <div  [ngClass]="{
+                    '': postal.invalid && (postal.dirty || postal.touched),
+                    'has-success': postal.valid && (postal.dirty || postal.touched)}"
+                        *ngIf="postal.errors && (postal.dirty || postal.touched)">
+                        <p class="sm-font" *ngIf="postal.errors.required">Postal is required.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label">City:</label>
+                      <input type="text" class="form-control" id="city" name="city" tabindex="8" [(ngModel)]="credentialsForBank.city"
+                        #city="ngModel" required>
+                      <div  [ngClass]="{
+                  '': city.invalid && (city.dirty || city.touched),
+                  'has-success': city.valid && (city.dirty || city.touched)}"
+                        *ngIf="city.errors && (city.dirty || city.touched)">
+                        <p class="sm-font" *ngIf="city.errors.required">City is required.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label">State/Province:</label>
+                      <input type="text" class="form-control" id="province" name="province" tabindex="9" [(ngModel)]="credentialsForBank.province"
+                        #province="ngModel" required>
+                      <div [ngClass]="{
+                    '': province.invalid && (province.dirty || province.touched),
+                    'has-success': province.valid && (province.dirty || province.touched)}"
+                        *ngIf="province.errors && (province.dirty || province.touched)">
+                        <p class="sm-font" *ngIf="province.errors.required">State is required.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row margin-b-20">
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15">
+                      <label class="label">Bank Country:</label>
+                      <input type="text" class="form-control" id="country" name="country" tabindex="10" [(ngModel)]="credentialsForBank.country"
+                        #country="ngModel" required>
+                      <div [ngClass]="{
+                    '': country.invalid && (country.dirty || country.touched),
+                    'has-success': country.valid && (country.dirty || country.touched)}"
+                        *ngIf="country.errors && (country.dirty || country.touched)">
+                        <p class="sm-font" *ngIf="country.errors.required">Company country is required.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6"></div>
+                </div>
+                <legend>ID & Address Proof</legend>
+                <div class="row margin-b-20">
+                  <div class="col-md-6">
+                    <div class="wrap_input req mt15 display-flex">
+                      <input type="file" class="form-control" id="fileBankID" name="fileBankID" (change)="selectFilebankid($event)"
+                          accept=".jpeg,.jpg,.png,.pdf" tabindex="6" required>
+                        <div>
+                          <p class="sm-font">{{fileerror['fileBankID']}}</p>
+                          <p class="sm-font">{{error['fileBankID']}}</p>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="wrap_input mt15">
+                      <span class="parameter-annotation">
+                        <ul>
+                          <li><b>Note:</b> For bank we need only Bank ID Card</li>
+                          <li><b>Note:</b> File should of type jpg,png,pdf and less then 3 MB in size
+                          </li>
+                        </ul>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt15" style="margin-top:20px;">
+                  <div class="col-md-12 text-centered">
+                    <button id="b_submit" [disabled]="kycBankForm.invalid" class="btn btn-orange btn-primary" (click)="bankInstKycfn()" tabindex="16" type="submit">Verify</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="kycDonePanel" class="content">
+  <div class="row">
+    <div class="col-md-12 text-center">KYC is in
+      process, please wait for at least 24 hours.
+    </div>
+    <div *ngIf="false" class="col-md-12 text-center" style="font-size: 36px;"><i class="fa fa-check-circle" style="color: green"></i>
+      Verified
+    </div>
+  </div>
+</div>
